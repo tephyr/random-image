@@ -11,24 +11,18 @@ import random
 from   PIL import Image
 
 
-def generate_image():
-    size = (200,200)
-    color = (255,0,0,0)
-    img = Image.new("RGB",size,color)
-    return img
-
 def generate_image_by_output_size(requested_size_in_kilobytes):
     """
     Generate a random bitmap by requested file size.
 
     Secret formula: 3 * HEIGHT * WIDTH == ~OUTPUT_SIZE_IN_BYTES
     """
-    # split height & width
+    # split height & width to make box
     size_in_kb = long(requested_size_in_kilobytes) * 1024
     axis = long(math.sqrt(size_in_kb/3))
 
     size = (axis, axis)
-    color = (255, 10, 15)
+    color = (255, 0, 0)
     img = Image.new("RGB", size, color)
     return img
 
