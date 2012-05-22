@@ -27,14 +27,15 @@ def generate_image_by_output_size(requested_size_in_kilobytes):
     return img
 
 def generate_random_image_by_size(requested_size_in_kilobytes, monochrome=False):
+    """
+    Generate a random image by size, optionally in monochrome
+    """
     img = generate_image_by_output_size(requested_size_in_kilobytes)
     img_data = []
     pixel_color = ""
     monochrome_colors = ("white", "black", )
     for pixel in img.getdata():
         if monochrome:
-            # either 0,0,0 or 255,255,255
-            #pixel_color = "black" if random.random() else "white"
             pixel_color = random.choice(monochrome_colors)
             img_data.append(ImageColor.getrgb(pixel_color))
         else:
@@ -46,12 +47,18 @@ def generate_random_image_by_size(requested_size_in_kilobytes, monochrome=False)
     return randomized_image
 
 def save_image(img, file_path, image_type=None):
+    """
+    Helper to save Image object to file, with optional explicit type.
+    """
     if image_type:
         img.save(file_path, image_type)
     else:
         img.save(file_path)
 
 def main():
+    """
+    Parse arguments and run functions.
+    """
     parser = argparse.ArgumentParser()
     parser.add_argument('--monochrome', '-m', dest="monochrome", action="store_true", help="Make image black-and-white")
     parser.add_argument('--size', '-s', dest="requested_size", help="Requested size, in kilobytes, of image")
